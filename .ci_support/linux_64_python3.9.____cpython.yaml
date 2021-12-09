@@ -16,12 +16,16 @@ docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
 freetype:
 - '2'
+geos:
+- 3.10.1
 giflib:
 - '5.2'
 jpeg:
 - '9'
 libcurl:
 - '7'
+libgdal:
+- '3.4'
 libpng:
 - '1.6'
 libxml2:
@@ -33,6 +37,8 @@ pin_run_as_build:
     max_pin: x
   libcurl:
     max_pin: x
+  libgdal:
+    max_pin: x.x
   libpng:
     max_pin: x.x
   libxml2:
@@ -40,6 +46,8 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
+proj:
+- 8.2.0
 python:
 - 3.9.* *_cpython
 target_platform:

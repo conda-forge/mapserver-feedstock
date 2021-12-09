@@ -11,7 +11,7 @@ source:
   sha256: b46c884bc42bd49873806a05325872e4418fc34e97824d4e13d398e86ea474ac
 
 build:
-  number: 0
+  number: 1
   # Any volunteers? :)
   skip: True  # [win or osx]
   run_exports:
@@ -30,28 +30,28 @@ requirements:
     - python
     - pip
     - freetype
-    - geos =3.10.1
+    - geos
     - giflib
     - libcurl
-    - libgdal =3.4.0
+    - libgdal
     - libpng
     - libpq
     - libxml2
     - jpeg
     - postgresql
-    - proj =8.2.0
+    - proj
     - swig
   run:
     - python
     - freetype
-    - geos =3.10.1
+    - geos
     - giflib
     - libcurl
-    - libgdal =3.4.0
+    - libgdal
     - libpng
     - libxml2
     - jpeg
-    - proj =8.2.0
+    - proj
 
 test:
   imports:
