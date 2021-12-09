@@ -11,9 +11,9 @@ source:
   sha256: b46c884bc42bd49873806a05325872e4418fc34e97824d4e13d398e86ea474ac
 
 build:
-  number: 1
+  number: 2
   # Any volunteers? :)
-  skip: True  # [win or osx]
+  skip: True  # [win]
   run_exports:
     # Presently libmapserver.so.2 is linked to libmapserver.so.x.y.z
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
