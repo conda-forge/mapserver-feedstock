@@ -13,7 +13,7 @@ source:
 build:
   number: 2
   # Any volunteers? :)
-  skip: True  # [win]
+  skip: True  # [win or osx]
   run_exports:
     # Presently libmapserver.so.2 is linked to libmapserver.so.x.y.z
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
