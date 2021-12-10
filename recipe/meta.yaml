@@ -42,7 +42,7 @@ requirements:
     - libpng
     - libpq
     - libxml2
-    - mysql-libs
+    - mysql-devel
     - pixman
     - postgresql
     - proj
