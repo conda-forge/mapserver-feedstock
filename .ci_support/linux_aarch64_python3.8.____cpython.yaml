@@ -38,8 +38,6 @@ libiconv:
 - '1.16'
 libpng:
 - '1.6'
-libprotobuf:
-- '3.18'
 libxml2:
 - '2.9'
 pin_run_as_build:
