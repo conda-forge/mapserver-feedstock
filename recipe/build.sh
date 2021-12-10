@@ -37,7 +37,7 @@ cmake                                                \
     -DWITH_POSTGIS=1                                 \
     -DWITH_POSTGRESQL=1                              \
     -DWITH_PROJ=1                                    \
-    -DWITH_PROTOBUFC=1                               \
+    -DWITH_PROTOBUFC=0                               \
     -DWITH_PYTHON=1                                  \
     -DWITH_RSVG=0                                    \
     -DWITH_SOS=1                                     \

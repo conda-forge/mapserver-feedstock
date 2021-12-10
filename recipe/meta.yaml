@@ -41,7 +41,6 @@ requirements:
     - libiconv
     - libpng
     - libpq
-    - libprotobuf
     - libxml2
     - mysql-libs
     - pixman
@@ -62,7 +61,6 @@ requirements:
     - libgdal
     - libiconv
     - libpng
-    - libprotobuf
     - libxml2
     - mysql-libs
     - pixman
