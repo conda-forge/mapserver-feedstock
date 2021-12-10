@@ -2,6 +2,8 @@ c_compiler:
 - gcc
 c_compiler_version:
 - '9'
+cairo:
+- '1.16'
 cdt_name:
 - cos7
 channel_sources:
@@ -20,24 +22,36 @@ geos:
 - 3.10.1
 giflib:
 - '5.2'
+harfbuzz:
+- '3'
 jpeg:
 - '9'
 libcurl:
 - '7'
 libgdal:
 - '3.4'
+libiconv:
+- '1.16'
 libpng:
 - '1.6'
+libprotobuf:
+- '3.18'
 libxml2:
 - '2.9'
 pin_run_as_build:
+  cairo:
+    max_pin: x.x
   freetype:
+    max_pin: x
+  harfbuzz:
     max_pin: x
   jpeg:
     max_pin: x
   libcurl:
     max_pin: x
   libgdal:
+    max_pin: x.x
+  libiconv:
     max_pin: x.x
   libpng:
     max_pin: x.x
@@ -46,6 +60,10 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
+  zlib:
+    max_pin: x.x
+pixman:
+- '0'
 proj:
 - 8.2.0
 python:
@@ -55,3 +73,5 @@ target_platform:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+zlib:
+- '1.2'
