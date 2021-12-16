@@ -11,7 +11,7 @@ source:
   sha256: b46c884bc42bd49873806a05325872e4418fc34e97824d4e13d398e86ea474ac
 
 build:
-  number: 2
+  number: 3
   # Any volunteers? :)
   skip: True  # [win or osx]
   run_exports:
@@ -29,29 +29,43 @@ requirements:
   host:
     - python
     - pip
+    - cairo
+    - fribidi
     - freetype
     - geos
     - giflib
+    - harfbuzz
+    - jpeg
     - libcurl
     - libgdal
+    - libiconv
     - libpng
     - libpq
     - libxml2
-    - jpeg
+    - mysql-devel
+    - pixman
     - postgresql
     - proj
     - swig
+    - zlib
   run:
     - python
+    - cairo
+    - fribidi
     - freetype
     - geos
     - giflib
+    - harfbuzz
+    - jpeg
     - libcurl
     - libgdal
+    - libiconv
     - libpng
     - libxml2
-    - jpeg
+    - mysql-libs
+    - pixman
     - proj
+    - zlib
 
 test:
   imports:
