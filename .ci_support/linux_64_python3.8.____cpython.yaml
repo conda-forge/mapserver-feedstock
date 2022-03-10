@@ -1,7 +1,7 @@
 c_compiler:
 - gcc
 c_compiler_version:
-- '9'
+- '10'
 cairo:
 - '1.16'
 cdt_name:
@@ -13,7 +13,7 @@ channel_targets:
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '9'
+- '10'
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
 freetype:
@@ -63,7 +63,7 @@ pin_run_as_build:
 pixman:
 - '0'
 proj:
-- 8.2.1
+- 9.0.0
 python:
 - 3.8.* *_cpython
 target_platform:
