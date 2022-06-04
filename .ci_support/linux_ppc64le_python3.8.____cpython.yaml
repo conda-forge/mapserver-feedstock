@@ -29,7 +29,7 @@ jpeg:
 libcurl:
 - '7'
 libgdal:
-- '3.4'
+- '3.5'
 libiconv:
 - '1.16'
 libpng:
