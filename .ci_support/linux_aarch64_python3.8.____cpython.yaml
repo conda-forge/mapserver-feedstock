@@ -23,7 +23,7 @@ docker_image:
 freetype:
 - '2'
 geos:
-- 3.10.2
+- 3.10.3
 giflib:
 - '5.2'
 harfbuzz:
