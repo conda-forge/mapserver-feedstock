@@ -31,7 +31,7 @@ libcurl:
 libgdal:
 - '3.5'
 libiconv:
-- '1.16'
+- '1'
 libpng:
 - '1.6'
 libxml2:
@@ -48,8 +48,6 @@ pin_run_as_build:
   libcurl:
     max_pin: x
   libgdal:
-    max_pin: x.x
-  libiconv:
     max_pin: x.x
   libpng:
     max_pin: x.x

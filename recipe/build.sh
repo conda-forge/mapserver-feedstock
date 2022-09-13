@@ -3,6 +3,7 @@
 set +x
 
 export PKG_CONFIG_LIBDIR=$PREFIX/lib
+export Python_ROOT_DIR=$PREFIX
 
 mkdir -p build
 cd build
