@@ -5,7 +5,7 @@ c_compiler_version:
 cairo:
 - '1'
 cdt_name:
-- cos6
+- cos7
 channel_sources:
 - conda-forge
 channel_targets:
@@ -45,9 +45,9 @@ pixman:
 proj:
 - 9.1.0
 python:
-- 3.7.* *_cpython
+- 3.11.* *_cpython
 target_platform:
-- linux-64
+- linux-ppc64le
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
