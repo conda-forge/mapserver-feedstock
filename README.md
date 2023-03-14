@@ -1,11 +1,11 @@
-About mapserver
-===============
+About mapserver-feedstock
+=========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/mapserver-feedstock/blob/main/LICENSE.txt)
 
 Home: https://mapserver.org/
 
 Package license: MIT
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/mapserver-feedstock/blob/main/LICENSE.txt)
 
 Summary: Platform for publishing spatial data and interative mapping.
 

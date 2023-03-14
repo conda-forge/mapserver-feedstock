@@ -11,7 +11,7 @@ source:
   sha256: bb7ee625eb6fdce9bd9851f83664442845d70d041e449449e88ac855e97d773c
 
 build:
-  number: 7
+  number: 8
   # Any volunteers? :)
   skip: true  # [win or osx]
   run_exports:
@@ -35,7 +35,7 @@ requirements:
     - geos
     - giflib
     - harfbuzz
-    - jpeg
+    - libjpeg-turbo
     - libcurl
     - libgdal
     - libiconv
@@ -56,7 +56,7 @@ requirements:
     - geos
     - giflib
     - harfbuzz
-    - jpeg
+    - libjpeg-turbo
     - libcurl
     - libgdal
     - libiconv
