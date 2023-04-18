@@ -1,6 +1,6 @@
 # NB: Lowercase!
 {% set name = "mapserver" %}
-{% set version = "8.0.0" %}
+{% set version = "8.0.1" %}
 
 package:
   name: {{ name }}
@@ -8,10 +8,10 @@ package:
 
 source:
   url: https://download.osgeo.org/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: bb7ee625eb6fdce9bd9851f83664442845d70d041e449449e88ac855e97d773c
+  sha256: 79d23595ef95d61d3d728ae5e60850a3dbfbf58a46953b4fdc8e6e0ffe5748ba
 
 build:
-  number: 10
+  number: 0
   # Any volunteers? :)
   skip: true  # [win or osx]
   run_exports:
