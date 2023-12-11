@@ -37,7 +37,7 @@ libpng:
 libpq:
 - '16'
 libxml2:
-- '2.11'
+- '2.12'
 pin_run_as_build:
   python:
     min_pin: x.x
