@@ -46,8 +46,6 @@ libpq:
 - '16'
 libxml2:
 - '2'
-mysql_devel:
-- '8.3'
 pin_run_as_build:
   python:
     min_pin: x.x
