@@ -15,7 +15,7 @@ source:
 build:
   number: 19
   # Any volunteers? :)
-  skip: true  # [win or osx or ppc64le]
+  skip: true  # [win or ppc64le]
   run_exports:
     # Presently libmapserver.so.2 is linked to libmapserver.so.x.y.z
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
