@@ -8,6 +8,8 @@ export Python_ROOT_DIR=$PREFIX
 mkdir -p build
 cd build
 
+swig --version
+
 cmake                                                \
     -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX              \
     -DCMAKE_BUILD_TYPE=Release                       \
