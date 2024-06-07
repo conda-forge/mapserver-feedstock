@@ -10,6 +10,7 @@ cd build
 
 cmake                                                \
     -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX              \
+    -DCMAKE_BUILD_TYPE=Release                       \
     -DWITH_APACHE_MODULE=0                           \
     -DWITH_CAIRO=1                                   \
     -DWITH_CLIENT_WFS=1                              \

@@ -72,7 +72,7 @@ requirements:
 
 test:
   imports:
-    - mapscript
+    - mapscript  # [ not osx ]
   commands:
     - mapserv -v
 
