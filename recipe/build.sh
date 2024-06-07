@@ -11,6 +11,7 @@ cd build
 $BUILD_PREFIX/bin/swig4.0 --version
 
 cmake                                                \
+    -DSWIG_EXECUTABLE=$BUILD_PREFIX/bin/swig4.0      \
     -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX              \
     -DCMAKE_BUILD_TYPE=Release                       \
     -DWITH_APACHE_MODULE=0                           \
