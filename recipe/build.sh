@@ -8,7 +8,6 @@ export Python_ROOT_DIR=$PREFIX
 mkdir -p build
 cd build
 
-$BUILD_PREFIX/bin/swig4.0 --version
 
 cmake                                                \
     -DSWIG_EXECUTABLE=$BUILD_PREFIX/bin/swig4.0      \
