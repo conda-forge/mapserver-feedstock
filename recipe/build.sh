@@ -8,8 +8,11 @@ export Python_ROOT_DIR=$PREFIX
 mkdir -p build
 cd build
 
+
 cmake                                                \
+    -DSWIG_EXECUTABLE=$BUILD_PREFIX/bin/swig4.0      \
     -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX              \
+    -DCMAKE_BUILD_TYPE=Release                       \
     -DWITH_APACHE_MODULE=0                           \
     -DWITH_CAIRO=1                                   \
     -DWITH_CLIENT_WFS=1                              \

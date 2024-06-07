@@ -13,16 +13,18 @@ source:
       - 0001-Fix-compilation-errors-with-libxml2-2.12.patch
 
 build:
-  number: 19
+  number: 20
   # Any volunteers? :)
-  skip: true  # [win or osx or ppc64le]
+  skip: true  # [win or ppc64le]
   run_exports:
     # Presently libmapserver.so.2 is linked to libmapserver.so.x.y.z
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
 
 requirements:
   build:
-    - python
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - swig
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
@@ -72,7 +74,7 @@ requirements:
 
 test:
   imports:
-    - mapscript
+    - mapscript  # [ not osx ]
   commands:
     - mapserv -v
 
