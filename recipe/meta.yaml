@@ -13,7 +13,7 @@ source:
       - 0001-Fix-compilation-errors-with-libxml2-2.12.patch
 
 build:
-  number: 20
+  number: 21
   # Any volunteers? :)
   skip: true  # [win or ppc64le]
   run_exports:
