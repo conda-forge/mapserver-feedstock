@@ -9,8 +9,6 @@ package:
 source:
   url: https://download.osgeo.org/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 0830c43feefeca132171b429403716a2cbaef0626d439f00e8a3a27a877724fe
-  patches:
-    - 0001-Fix-compilation-errors-with-libxml2-2.12.patch
 
 build:
   number: 0
