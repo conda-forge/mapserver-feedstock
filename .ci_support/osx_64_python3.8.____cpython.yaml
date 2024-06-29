@@ -27,7 +27,7 @@ geos:
 giflib:
 - '5.2'
 harfbuzz:
-- '8'
+- '9'
 libcurl:
 - '8'
 libgdal:
