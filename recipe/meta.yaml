@@ -1,6 +1,6 @@
 # NB: Lowercase!
 {% set name = "mapserver" %}
-{% set version = "8.0.2" %}
+{% set version = "8.2.0" %}
 
 package:
   name: {{ name }}
@@ -11,9 +11,9 @@ source:
   sha256: 0830c43feefeca132171b429403716a2cbaef0626d439f00e8a3a27a877724fe
 
 build:
-  number: 2
+  number: 0
   # Any volunteers? :)
-  skip: true  # [win or ppc64le]
+  skip: true  # [ppc64le]
   run_exports:
     # Presently libmapserver.so.2 is linked to libmapserver.so.x.y.z
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
