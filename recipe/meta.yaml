@@ -51,6 +51,7 @@ requirements:
     - proj
     - swig
     - zlib
+    - protobuf-c
   run:
     - python
     - cairo
