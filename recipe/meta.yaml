@@ -34,6 +34,8 @@ requirements:
     - cmake
     - make  # [unix]
     - pkg-config  # [not win]
+    - libprotobuf
+
   host:
     - python
     - pip
