@@ -37,7 +37,7 @@ requirements:
     - cmake
     - make  # [unix]
     - pkg-config  # [not win]
-    - libprotobuf
+    - protobuf-c
 
   host:
     - python
