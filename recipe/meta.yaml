@@ -10,6 +10,11 @@ source:
   url: https://download.osgeo.org/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: bc2cb4339cfc241aa68c8ae35b0e8ee6c19da7781cad16653a26c5229f2c98f2
 
+  patches:
+
+    # protoc location detection
+    - patches/0001-protoc-detection.patch
+
 build:
   number: 0
   # Any volunteers? :)
@@ -70,6 +75,7 @@ requirements:
     - pixman
     - proj
     - zlib
+    - protobuf-c
 
 test:
   imports:
