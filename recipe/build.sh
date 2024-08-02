@@ -50,7 +50,7 @@ cmake                                                \
     -DWITH_XMLMAPFILE=0                              \
     -DWITH_ZLIB=1                                    \
     -DPROTOBUFC_EXECUTEABLE=$CONDA_PREFIX/bin/protoc-gen-c \
-    --debug-find ${SRC_DIR}
+    ${SRC_DIR}
 
 make -j${CPU_COUNT}
 make install
