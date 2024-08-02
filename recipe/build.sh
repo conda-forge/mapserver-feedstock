@@ -49,7 +49,7 @@ cmake                                                \
     -DWITH_V8=0                                      \
     -DWITH_XMLMAPFILE=0                              \
     -DWITH_ZLIB=1                                    \
-    -DPROTOBUFC_EXECUTEABLE=$BUILD_PREFIX/bin/protoc \
+    -DPROTOBUF_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc \
     ${SRC_DIR}
 
 make -j${CPU_COUNT}

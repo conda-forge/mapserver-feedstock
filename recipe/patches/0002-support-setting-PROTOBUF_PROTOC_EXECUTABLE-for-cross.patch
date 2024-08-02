@@ -1,0 +1,25 @@
+From e7cfa72bd26bad5943d78a0a0cdb7d4ccce24134 Mon Sep 17 00:00:00 2001
+From: Howard Butler <hobu.inc@gmail.com>
+Date: Fri, 2 Aug 2024 16:39:08 -0500
+Subject: [PATCH 2/2] support setting PROTOBUF_PROTOC_EXECUTABLE for cross
+ compilation scenarios
+
+---
+ cmake/FindProtobufC.cmake | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/cmake/FindProtobufC.cmake b/cmake/FindProtobufC.cmake
+index a037452ed..2aefdef31 100644
+--- a/cmake/FindProtobufC.cmake
++++ b/cmake/FindProtobufC.cmake
+@@ -68,7 +68,9 @@ function(PROTOBUFC_GENERATE_C SOURCES HEADERS)
+ 
+     list(APPEND ${SOURCES} "${CMAKE_CURRENT_BINARY_DIR}/${FIL_WE}.${PROTBUFC_SOURCE_EXTENSION}")
+     list(APPEND ${HEADERS} "${CMAKE_CURRENT_BINARY_DIR}/${FIL_WE}.${PROTBUFC_HEADER_EXTENSION}")
+-
++    IF (CMAKE_CROSSCOMPILING)
++      SET(PROTOBUFC_COMPILER "${PROTOBUF_PROTOC_EXECUTABLE}")
++    ENDIF (CMAKE_CROSSCOMPILING)
+     add_custom_command(
+       OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${FIL_WE}.${PROTBUFC_SOURCE_EXTENSION}"
+              "${CMAKE_CURRENT_BINARY_DIR}/${FIL_WE}.${PROTBUFC_HEADER_EXTENSION}"

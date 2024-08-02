@@ -15,6 +15,9 @@ source:
     # protoc location detection
     - patches/0001-protoc-detection.patch
 
+    # setting protoc location
+    - patches/0002-support-setting-PROTOBUF_PROTOC_EXECUTABLE-for-cross.patch
+
 build:
   number: 2
   # Any volunteers? :)
