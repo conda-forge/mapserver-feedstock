@@ -22,7 +22,6 @@ source:
 build:
   number: 0
   # Any volunteers? :)
-  skip: true
   run_exports:
     # Presently libmapserver.so.2 is linked to libmapserver.so.x.y.z
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
