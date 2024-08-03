@@ -1,0 +1,27 @@
+From 350b7526be022be7abda3fc28b57153e2ee3db43 Mon Sep 17 00:00:00 2001
+From: Howard Butler <hobu.inc@gmail.com>
+Date: Tue, 9 Jul 2024 10:27:25 -0500
+Subject: [PATCH 56/60] mapcompositingfilter.c: PCRE2 related fix
+
+---
+ src/mapcompositingfilter.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/src/mapcompositingfilter.c b/src/mapcompositingfilter.c
+index d75b82cab..aff90b3f4 100644
+--- a/src/mapcompositingfilter.c
++++ b/src/mapcompositingfilter.c
+@@ -26,7 +26,13 @@
+  * DEALINGS IN THE SOFTWARE.
+  *****************************************************************************/
+ #include "mapserver.h"
++
++#ifdef USE_PCRE2
++#include <pcre2posix.h>
++#else
+ #include <regex.h>
++#endif
++
+ #define pixmove(rb, srcx, srcy, dstx, dsty)                                    \
+   memcpy(rb->data.rgba.pixels + dsty * rb->data.rgba.row_step + dstx * 4,      \
+          rb->data.rgba.pixels + srcy * rb->data.rgba.row_step + srcx * 4, 4)

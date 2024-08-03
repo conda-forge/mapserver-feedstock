@@ -15,6 +15,8 @@ REM -DCMAKE_CXX_FLAGS="/w4004"
 cmake -G "Ninja" "%CMAKE_ARGS%"                      ^
     -DCMAKE_INSTALL_PREFIX:PATH=%PREFIX%             ^
     -DCMAKE_BUILD_TYPE=Release                       ^
+    -DBUILD_SHARED_LIBS=ON                           ^
+    -DBUILD_DYNAMIC=ON                           ^
     -DWITH_APACHE_MODULE=0                           ^
     -DWITH_CAIRO=1                                   ^
     -DWITH_CLIENT_WFS=1                              ^
@@ -55,9 +57,15 @@ cmake -G "Ninja" "%CMAKE_ARGS%"                      ^
     "%SRC_DIR%"
 if errorlevel 1 exit /b 1
 
+
 cmake --build . -j %CPU_COUNT% --verbose --config Release
 if errorlevel 1 exit /b 1
 
-cmake --install . -j %CPU_COUNT% --verbose --config Release
+cmake --install . --verbose --config Release
 if errorlevel 1 exit /b 1
 
+REM manually install mapserver.dll because MapServer's install is broken right now
+copy mapserver.dll %PREFIX%\bin
+
+cd src\mapscript\python
+%PYTHON% -m pip install .
