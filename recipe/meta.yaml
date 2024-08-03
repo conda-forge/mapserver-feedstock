@@ -1,6 +1,6 @@
 # NB: Lowercase!
 {% set name = "mapserver" %}
-{% set version = "8.2.0" %}
+{% set version = "8.2.1" %}
 
 package:
   name: {{ name }}
@@ -8,8 +8,15 @@ package:
 
 source:
   url: https://download.osgeo.org/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 26ec2d951ca502483586bf7849dc99b8b378cd4764e47bf0555a3f12fa3d9053
+  sha256: bc2cb4339cfc241aa68c8ae35b0e8ee6c19da7781cad16653a26c5229f2c98f2
+
   patches:
+
+    # protoc location detection
+    - patches/0001-protoc-detection.patch
+
+    # setting protoc location
+    - patches/0002-support-setting-PROTOBUF_PROTOC_EXECUTABLE-for-cross.patch
     - 0001-Add-optional-support-for-using-PCRE2-regular-express.patch
 
 build:
@@ -31,6 +38,8 @@ requirements:
     - cmake
     - make  # [unix]
     - pkg-config  # [not win]
+    - protobuf-c
+
   host:
     - python
     - pip
@@ -53,6 +62,7 @@ requirements:
     - proj
     - swig
     - zlib
+    - protobuf-c
   run:
     - python
     - cairo
@@ -71,6 +81,7 @@ requirements:
     - pixman
     - proj
     - zlib
+    - protobuf-c
 
 test:
   imports:

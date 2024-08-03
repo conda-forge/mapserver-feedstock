@@ -41,7 +41,7 @@ cmake                                                \
     -DWITH_POSTGIS=1                                 \
     -DWITH_POSTGRESQL=1                              \
     -DWITH_PROJ=1                                    \
-    -DWITH_PROTOBUFC=0                               \
+    -DWITH_PROTOBUFC=1                               \
     -DWITH_PYTHON=1                                  \
     -DWITH_RSVG=0                                    \
     -DWITH_SOS=1                                     \
@@ -49,7 +49,8 @@ cmake                                                \
     -DWITH_V8=0                                      \
     -DWITH_XMLMAPFILE=0                              \
     -DWITH_ZLIB=1                                    \
-    --debug-output ${SRC_DIR}
+    -DPROTOBUF_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc \
+    ${SRC_DIR}
 
 make -j${CPU_COUNT}
 make install
