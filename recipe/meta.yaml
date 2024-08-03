@@ -17,12 +17,12 @@ source:
 
     # setting protoc location
     - patches/0002-support-setting-PROTOBUF_PROTOC_EXECUTABLE-for-cross.patch
-    - 0001-Add-optional-support-for-using-PCRE2-regular-express.patch
+#    - 0001-Add-optional-support-for-using-PCRE2-regular-express.patch
 
 build:
   number: 0
   # Any volunteers? :)
-  skip: true  # [ppc64le]
+  skip: true
   run_exports:
     # Presently libmapserver.so.2 is linked to libmapserver.so.x.y.z
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
