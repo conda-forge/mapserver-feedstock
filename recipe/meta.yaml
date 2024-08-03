@@ -10,8 +10,16 @@ source:
   url: https://download.osgeo.org/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: bc2cb4339cfc241aa68c8ae35b0e8ee6c19da7781cad16653a26c5229f2c98f2
 
+  patches:
+
+    # protoc location detection
+    - patches/0001-protoc-detection.patch
+
+    # setting protoc location
+    - patches/0002-support-setting-PROTOBUF_PROTOC_EXECUTABLE-for-cross.patch
+
 build:
-  number: 1
+  number: 2
   # Any volunteers? :)
   skip: true  # [win]
   run_exports:
@@ -29,6 +37,8 @@ requirements:
     - cmake
     - make  # [unix]
     - pkg-config  # [not win]
+    - protobuf-c
+
   host:
     - python
     - pip
@@ -51,6 +61,7 @@ requirements:
     - proj
     - swig
     - zlib
+    - protobuf-c
   run:
     - python
     - cairo
@@ -69,6 +80,7 @@ requirements:
     - pixman
     - proj
     - zlib
+    - protobuf-c
 
 test:
   imports:
