@@ -8,7 +8,9 @@ package:
 
 source:
   url: https://download.osgeo.org/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 0830c43feefeca132171b429403716a2cbaef0626d439f00e8a3a27a877724fe
+  sha256: 26ec2d951ca502483586bf7849dc99b8b378cd4764e47bf0555a3f12fa3d9053
+  patches:
+    - 0001-Add-optional-support-for-using-PCRE2-regular-express.patch
 
 build:
   number: 0
