@@ -1,0 +1,213 @@
+From f952139f354880892b28f7c094a7280d49461b70 Mon Sep 17 00:00:00 2001
+From: Even Rouault <even.rouault@spatialys.com>
+Date: Sat, 8 Jun 2024 15:10:50 +0200
+Subject: [PATCH] Add optional support for using PCRE2 regular expression
+ library instead of POSIX regex
+
+This requires the pcre2-posix compatibility library.
+
+PCRE2 is only used if explicitly enabled with -DWITH_PCRE2=ON, except on
+Windows if PCRE2 is found and REGEX_DIR is not defined.
+---
+ CMakeLists.txt            | 31 +++++++++++++++++++++++++------
+ ci/build.sh               | 14 +++++++++++---
+ ci/setup.sh               |  1 +
+ cmake/FindPCRE2.cmake     | 25 +++++++++++++++++++++++++
+ fuzzers/CMakeLists.txt    |  4 ++--
+ src/mapregex.c            |  5 +++++
+ src/mapserver-config.h.in |  1 +
+ 7 files changed, 70 insertions(+), 11 deletions(-)
+ create mode 100644 cmake/FindPCRE2.cmake
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6b6157df9..c346a3039 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -82,10 +82,10 @@ endforeach()
+ 
+ macro (ms_link_libraries)
+   if(BUILD_DYNAMIC)
+-    target_link_libraries(mapserver ${ARGV})
++    target_link_libraries(mapserver PRIVATE ${ARGV})
+   endif(BUILD_DYNAMIC)
+   if(BUILD_STATIC)
+-    target_link_libraries(mapserver_static ${ARGV})
++    target_link_libraries(mapserver_static PRIVATE ${ARGV})
+   endif(BUILD_STATIC)
+ endmacro()
+ 
+@@ -290,8 +290,23 @@ src/flatgeobuf/packedrtree.cpp
+ )
+ include_directories(src/flatgeobuf/include)
+ 
++find_package(PCRE2)
++set(WITH_PCRE2_DEFAULT OFF)
++if(WIN32 AND (NOT DEFINED REGEX_DIR) AND PCRE2_FOUND)
++  set(WITH_PCRE2_DEFAULT ON)
++endif()
++option(WITH_PCRE2 "Use PCRE2 instead of POSIX regex" ${PCRE2_FOUND})
++if(WITH_PCRE2 AND NOT PCRE2_FOUND)
++    message(FATAL_ERROR "WITH_PCRE2=ON set, but PCRE2 not found")
++endif()
++
+ #add_definitions(-DHASH_DEBUG=1)
+-if(WIN32)
++set(REGEX_SOURCES "")
++
++if(WIN32 AND NOT WITH_PCRE2)
++  if(NOT DEFINED REGEX_DIR)
++      message(FATAL_ERROR "Variable REGEX_DIR should point to regex-0.12 source directory, or PCRE2 library should be available")
++  endif()
+   set(REGEX_SOURCES ${REGEX_DIR}/regex.c)
+   include_directories(${REGEX_DIR})
+   add_definitions(-DREGEX_MALLOC -DUSE_GENERIC_MS_NINT -DHAVE_STRING_H)
+@@ -307,9 +322,7 @@ if(WIN32)
+     # mingw provides stdlib.h
+     add_definitions(-DSTDC_HEADERS=1)
+   endif(MINGW)
+-else(WIN32)
+-  set(REGEX_SOURCES "")
+-endif(WIN32)
++endif()
+ 
+ set(mapserver_SOURCES src/fontcache.c 
+ src/cgiutil.c src/mapgeos.c src/maporaclespatial.c src/mapsearch.c src/mapwms.cpp src/classobject.c
+@@ -862,6 +875,11 @@ if(WITH_V8)
+   ENDIF()
+ ENDIF(WITH_V8)
+ 
++if(WITH_PCRE2)
++  SET(USE_PCRE2 1)
++  ms_link_libraries(PCRE2::PCRE2-POSIX)
++endif()
++
+ if(WITH_PHPNG)
+    add_subdirectory("src/mapscript/phpng")
+    set(USE_PHPNG_MAPSCRIPT 1)
+@@ -955,6 +973,7 @@ message(STATUS "  * png: ${PNG_LIBRARY}")
+ message(STATUS "  * jpeg: ${JPEG_LIBRARY}")
+ message(STATUS "  * freetype: ${FREETYPE_LIBRARY}")
+ message(STATUS " * Optional components")
++status_optional_component("PCRE2" "${USE_PCRE2}" "${PCRE2-POSIX_LIBRARY}")
+ status_optional_component("GIF" "${USE_GIF}" "${GIF_LIBRARY}")
+ status_optional_component("MYSQL" "${USE_MYSQL}" "${MYSQL_LIBRARY}")
+ status_optional_component("FRIBIDI" "${USE_FRIBIDI}" "${FRIBIDI_LIBRARY}")
+diff --git a/ci/build.sh b/ci/build.sh
+index 1afdf0ea2..1c9903526 100755
+--- a/ci/build.sh
++++ b/ci/build.sh
+@@ -17,10 +17,18 @@ EXTRA_CMAKEFLAGS="-Werror=dev"
+ 
+ if [ "${WITH_ASAN:-}" = "true" ]; then
+     # -DNDEBUG to avoid issues with cairo cleanup
+-    make cmakebuild MFLAGS="-j$(nproc)" CMAKE_C_FLAGS="-g -fsanitize=address -DNDEBUG" CMAKE_CXX_FLAGS="-g -fsanitize=address -DNDEBUG" \
+-    EXTRA_CMAKEFLAGS="${EXTRA_CMAKEFLAGS} -DCMAKE_BUILD_TYPE=None -DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address"
++    make cmakebuild \
++        MFLAGS="-j$(nproc)" \
++        CMAKE_C_FLAGS="-g -fsanitize=address -DNDEBUG" \
++        CMAKE_CXX_FLAGS="-g -fsanitize=address -DNDEBUG" \
++        EXTRA_CMAKEFLAGS="${EXTRA_CMAKEFLAGS} -DCMAKE_BUILD_TYPE=None -DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address"
+ else
+-    make cmakebuild MFLAGS="-j$(nproc)" CMAKE_C_FLAGS="-O2" CMAKE_CXX_FLAGS="-O2" LIBMAPSERVER_EXTRA_FLAGS="-Wall -Werror -Wextra"
++    make cmakebuild \
++        MFLAGS="-j$(nproc)" \
++        CMAKE_C_FLAGS="-O2" \
++        CMAKE_CXX_FLAGS="-O2" \
++        LIBMAPSERVER_EXTRA_FLAGS="-Wall -Werror -Wextra" \
++        EXTRA_CMAKEFLAGS="${EXTRA_CMAKEFLAGS} -DWITH_PCRE2=ON"
+     make mspython-wheel
+     make phpng-build
+ fi
+diff --git a/ci/setup.sh b/ci/setup.sh
+index 3f811e61e..c4011e40a 100755
+--- a/ci/setup.sh
++++ b/ci/setup.sh
+@@ -14,6 +14,7 @@ sudo apt-get update
+ sudo apt-get install -y --allow-unauthenticated build-essential protobuf-c-compiler libprotobuf-c-dev bison flex libfribidi-dev \
+             librsvg2-dev colordiff libpq-dev libpng-dev libjpeg-dev libgif-dev libgeos-dev libfreetype6-dev libfcgi-dev libcurl4-gnutls-dev \
+             libcairo2-dev libgdal-dev libproj-dev libxml2-dev libexempi-dev lcov lftp postgis libharfbuzz-dev gdal-bin proj-bin ccache curl \
++            libpcre2-dev \
+             postgresql-server-dev-12 postgresql-12-postgis-3 postgresql-12-postgis-3-scripts g++ ca-certificates
+ 
+ sudo apt-get install -y --allow-unauthenticated libmono-system-drawing4.0-cil mono-mcs
+diff --git a/cmake/FindPCRE2.cmake b/cmake/FindPCRE2.cmake
+new file mode 100644
+index 000000000..a2193a095
+--- /dev/null
++++ b/cmake/FindPCRE2.cmake
+@@ -0,0 +1,25 @@
++# Distributed under the OSI-approved BSD 3-Clause License.  See accompanying
++# file COPYING-CMAKE-SCRIPTS or https://cmake.org/licensing for details.
++
++#.rst
++# FindPCRE2
++# ~~~~~~~~~
++# Copyright (C) 2017-2018, Hiroshi Miura
++#
++# Find the native PCRE2 headers and libraries.
++
++find_path(PCRE2_INCLUDE_DIR NAMES pcre2posix.h)
++find_library(PCRE2-POSIX_LIBRARY NAMES pcre2-posix pcre2-posixd pcre2-posix-static pcre2-posix-staticd NAMES_PER_DIR)
++include(FindPackageHandleStandardArgs)
++find_package_handle_standard_args(PCRE2
++                                  REQUIRED_VARS PCRE2-POSIX_LIBRARY PCRE2_INCLUDE_DIR)
++mark_as_advanced(PCRE2_INCLUDE_DIR PCRE2-POSIX_LIBRARY)
++if(PCRE2_FOUND)
++    if(NOT TARGET PCRE2::PCRE2-POSIX)
++        add_library(PCRE2::PCRE2-POSIX UNKNOWN IMPORTED)
++        set_target_properties(PCRE2::PCRE2-POSIX PROPERTIES
++                              INTERFACE_INCLUDE_DIRECTORIES "${PCRE2_INCLUDE_DIR}"
++                              IMPORTED_LINK_INTERFACE_LANGUAGES "C"
++                              IMPORTED_LOCATION "${PCRE2-POSIX_LIBRARY}")
++    endif()
++endif()
+diff --git a/fuzzers/CMakeLists.txt b/fuzzers/CMakeLists.txt
+index 6b11d125d..6a9d78a2a 100644
+--- a/fuzzers/CMakeLists.txt
++++ b/fuzzers/CMakeLists.txt
+@@ -3,11 +3,11 @@ foreach(FUZZER_NAME IN ITEMS shapefuzzer mapfuzzer configfuzzer)
+         add_executable(${FUZZER_NAME} ${FUZZER_NAME}.c)
+         target_compile_options(${FUZZER_NAME} PRIVATE -Wall -Wextra -Werror=format-security)
+         target_include_directories(${FUZZER_NAME} PRIVATE ${PROJECT_SOURCE_DIR})
+-        target_link_libraries(${FUZZER_NAME} ${MAPSERVER_LIBMAPSERVER})
++        target_link_libraries(${FUZZER_NAME} PRIVATE ${MAPSERVER_LIBMAPSERVER} ${GDAL_LIBRARY})
+     else()
+         set(FUZZER_REPRODUCER "${FUZZER_NAME}_reproducer")
+         add_executable(${FUZZER_REPRODUCER} ${FUZZER_NAME}.c reproducer_main.cpp)
+         target_include_directories(${FUZZER_REPRODUCER} PRIVATE ${PROJECT_SOURCE_DIR})
+-        target_link_libraries(${FUZZER_REPRODUCER} ${MAPSERVER_LIBMAPSERVER})
++        target_link_libraries(${FUZZER_REPRODUCER} ${MAPSERVER_LIBMAPSERVER} ${GDAL_LIBRARY})
+     endif()
+ endforeach()
+diff --git a/src/mapregex.c b/src/mapregex.c
+index bd8bf329a..631d2a070 100644
+--- a/src/mapregex.c
++++ b/src/mapregex.c
+@@ -51,7 +51,12 @@
+ 
+ #include "mapserver.h"
+ #include "mapregex.h"
++
++#ifdef USE_PCRE2
++#include <pcre2posix.h>
++#else
+ #include <regex.h>
++#endif
+ 
+ MS_API_EXPORT(int) ms_regcomp(ms_regex_t *regex, const char *expr, int cflags) {
+   /* Must free in regfree() */
+diff --git a/src/mapserver-config.h.in b/src/mapserver-config.h.in
+index eaf88ec0f..e4aa60c91 100644
+--- a/src/mapserver-config.h.in
++++ b/src/mapserver-config.h.in
+@@ -39,6 +39,7 @@
+ #cmakedefine SDE64 1
+ #cmakedefine USE_EXTENDED_DEBUG 1
+ #cmakedefine USE_V8_MAPSCRIPT 1
++#cmakedefine USE_PCRE2 1
+ 
+ /*windows specific hacks*/
+ #if defined(_WIN32)
+-- 
+2.39.3 (Apple Git-146)
+

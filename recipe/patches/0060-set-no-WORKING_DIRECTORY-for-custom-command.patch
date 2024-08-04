@@ -1,0 +1,21 @@
+From 988e174c9923887b1470e9811a0eea1ec92d701a Mon Sep 17 00:00:00 2001
+From: Howard Butler <hobu.inc@gmail.com>
+Date: Tue, 9 Jul 2024 15:20:39 -0500
+Subject: [PATCH 60/60] set no WORKING_DIRECTORY for custom command
+
+---
+ src/mapscript/python/CMakeLists.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/mapscript/python/CMakeLists.txt b/src/mapscript/python/CMakeLists.txt
+index 25b793950..8962d9115 100644
+--- a/src/mapscript/python/CMakeLists.txt
++++ b/src/mapscript/python/CMakeLists.txt
+@@ -97,7 +97,6 @@ add_custom_command(
+ 
+ add_custom_command(
+     TARGET ${SWIG_MODULE_pythonmapscript_REAL_NAME}
+-    WORKING_DIRECTORY ${OUTPUT_FOLDER}
+     POST_BUILD
+     COMMAND ${CMAKE_COMMAND} -E copy
+         $<SHELL_PATH:${PROJECT_SOURCE_DIR}/src/mapscript/python/mapscript/__init__.py>
