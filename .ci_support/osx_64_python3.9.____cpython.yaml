@@ -30,7 +30,7 @@ harfbuzz:
 - '9'
 libcurl:
 - '8'
-libgdal:
+libgdal_core:
 - '3.9'
 libiconv:
 - '1'
