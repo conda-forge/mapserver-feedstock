@@ -85,6 +85,7 @@ requirements:
     - proj
     - zlib
     - protobuf-c
+    - fcgi2
 
 test:
   imports:
