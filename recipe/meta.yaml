@@ -62,6 +62,7 @@ requirements:
     - pixman
     - postgresql
     - proj
+    - setuptools
     - swig
     - zlib
     - protobuf-c
