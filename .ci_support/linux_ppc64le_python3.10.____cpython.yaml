@@ -51,7 +51,7 @@ pixman:
 postgresql:
 - '16'
 proj:
-- '9.4'
+- '9.5'
 python:
 - 3.10.* *_cpython
 target_platform:
