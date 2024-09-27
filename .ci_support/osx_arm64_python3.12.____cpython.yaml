@@ -23,7 +23,7 @@ cxx_compiler_version:
 freetype:
 - '2'
 geos:
-- 3.12.2
+- 3.13.0
 giflib:
 - '5.2'
 harfbuzz:
