@@ -24,7 +24,7 @@ source:
     - patches/0056-mapcompositingfilter.c-PCRE2-related-fix.patch
 
 build:
-  number: 3
+  number: 4
   run_exports:
     # Presently libmapserver.so.2 is linked to libmapserver.so.x.y.z
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
