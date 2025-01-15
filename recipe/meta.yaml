@@ -1,6 +1,6 @@
 # NB: Lowercase!
 {% set name = "mapserver" %}
-{% set version = "8.2.2" %}
+{% set version = "8.4.0" %}
 
 package:
   name: {{ name }}
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://download.osgeo.org/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 47d8ee4bd12ddd2f04b24aa84c6e58f8e6990bcd5c150ba42e22f30ad30568e4
+  sha256: b0cb3612cd58458cca0808b117c16b9415b3231af39aefb90d668e8b8b188e2c
 
   patches:
 
@@ -24,7 +24,7 @@ source:
     - patches/0056-mapcompositingfilter.c-PCRE2-related-fix.patch
 
 build:
-  number: 6
+  number: 0
   run_exports:
     # Presently libmapserver.so.2 is linked to libmapserver.so.x.y.z
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
