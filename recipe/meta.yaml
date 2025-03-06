@@ -19,7 +19,7 @@ source:
     - patches/0002-support-setting-PROTOBUF_PROTOC_EXECUTABLE-for-cross.patch
 
 build:
-  number: 0
+  number: 1
   run_exports:
     # Presently libmapserver.so.2 is linked to libmapserver.so.x.y.z
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
