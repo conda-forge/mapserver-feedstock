@@ -12,11 +12,11 @@ echo "cd %cd%"
 
 REM -DCMAKE_CXX_FLAGS="/w4004"
 
-cmake -G "Ninja" "%CMAKE_ARGS%"                      ^
+cmake -G "Ninja" %CMAKE_ARGS%                        ^
     -DCMAKE_INSTALL_PREFIX:PATH=%PREFIX%             ^
     -DCMAKE_BUILD_TYPE=Release                       ^
     -DBUILD_SHARED_LIBS=ON                           ^
-    -DBUILD_DYNAMIC=ON                           ^
+    -DBUILD_DYNAMIC=ON                               ^
     -DWITH_APACHE_MODULE=0                           ^
     -DWITH_CAIRO=1                                   ^
     -DWITH_CLIENT_WFS=1                              ^
@@ -54,7 +54,7 @@ cmake -G "Ninja" "%CMAKE_ARGS%"                      ^
     -DWITH_XMLMAPFILE=0                              ^
     -DWITH_ZLIB=1                                    ^
     -DWITH_PCRE2=ON                                  ^
-    "%SRC_DIR%"
+    %SRC_DIR%
 if errorlevel 1 exit /b 1
 
 
