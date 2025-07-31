@@ -63,6 +63,8 @@ requirements:
     - zlib
     - protobuf-c
     - fcgi2
+    - unixodbc  # [not win]
+
   run:
     - python
     - cairo
