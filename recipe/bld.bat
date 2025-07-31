@@ -36,6 +36,7 @@ cmake -G "Ninja" %CMAKE_ARGS%                        ^
     -DWITH_JAVA=0                                    ^
     -DWITH_JPEG=1                                    ^
     -DWITH_LIBXML2=1                                 ^
+    -DWITH_MSSQL2008=1                               ^
     -DWITH_MYSQL=1                                   ^
     -DWITH_ORACLESPATIAL=0                           ^
     -DWITH_PERL=0                                    ^
