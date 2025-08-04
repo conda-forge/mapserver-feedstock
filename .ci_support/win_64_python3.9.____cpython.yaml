@@ -16,8 +16,6 @@ geos:
 - 3.13.1
 giflib:
 - '5.2'
-harfbuzz:
-- 11.0.1
 libcurl:
 - '8'
 libgdal_core:
