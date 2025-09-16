@@ -19,7 +19,7 @@ source:
     - patches/0002-support-setting-PROTOBUF_PROTOC_EXECUTABLE-for-cross.patch
 
 build:
-  number: 10
+  number: 11
   run_exports:
     # Presently libmapserver.so.2 is linked to libmapserver.so.x.y.z
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
@@ -53,7 +53,7 @@ requirements:
     - libiconv
     - libpng
     - libpq
-    - libxml2
+    - libxml2-devel
     - mysql-devel
     - pixman
     - postgresql
@@ -78,7 +78,7 @@ requirements:
     - libgdal-core
     - libiconv
     - libpng
-    - libxml2
+    - libxml2-devel
     - mysql-libs
     - pixman
     - proj
