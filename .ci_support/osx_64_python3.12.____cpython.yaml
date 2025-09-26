@@ -37,7 +37,7 @@ libjpeg_turbo:
 libpng:
 - '1.6'
 libpq:
-- '17'
+- '18'
 libxml2_devel:
 - '2.14'
 macos_machine:
@@ -51,7 +51,7 @@ pin_run_as_build:
 pixman:
 - '0'
 postgresql:
-- '17'
+- '18'
 proj:
 - '9.7'
 python:
