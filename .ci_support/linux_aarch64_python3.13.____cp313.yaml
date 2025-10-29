@@ -8,8 +8,6 @@ c_stdlib_version:
 - '2.17'
 cairo:
 - '1'
-cdt_name:
-- conda
 channel_sources:
 - conda-forge
 channel_targets:
@@ -23,7 +21,7 @@ docker_image:
 freetype:
 - '2'
 geos:
-- 3.14.0
+- 3.14.1
 giflib:
 - '5.2'
 libcurl:
@@ -59,7 +57,5 @@ target_platform:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-- - python
-  - channel_sources
 zlib:
 - '1'
