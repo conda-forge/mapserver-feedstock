@@ -19,7 +19,7 @@ giflib:
 libcurl:
 - '8'
 libgdal_core:
-- '3.11'
+- '3.12'
 libiconv:
 - '1'
 libjpeg_turbo:
