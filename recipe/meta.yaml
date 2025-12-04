@@ -1,6 +1,6 @@
 # NB: Lowercase!
 {% set name = "mapserver" %}
-{% set version = "8.4.1" %}
+{% set version = "8.6.0" %}
 
 package:
   name: {{ name }}
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://download.osgeo.org/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: fe60bfdbab69437b5f97bb4ca41f2407e245c90edc2a727bf1d4428edb4a240f
+  sha256: af1f6d7b6b4361d7b0305b4ea1869e33fa49a721bbc0e28e13dd015952dfd902
 
   patches:
 
@@ -19,7 +19,7 @@ source:
     - patches/0002-support-setting-PROTOBUF_PROTOC_EXECUTABLE-for-cross.patch
 
 build:
-  number: 3
+  number: 0
   run_exports:
     # Presently libmapserver.so.2 is linked to libmapserver.so.x.y.z
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
