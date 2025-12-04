@@ -10,10 +10,6 @@ source:
   url: https://download.osgeo.org/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: af1f6d7b6b4361d7b0305b4ea1869e33fa49a721bbc0e28e13dd015952dfd902
 
-  patches:
-    # setting protoc location
-    - patches/0002-support-setting-PROTOBUF_PROTOC_EXECUTABLE-for-cross.patch
-
 build:
   number: 0
   run_exports:
