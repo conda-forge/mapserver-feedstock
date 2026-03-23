@@ -1,6 +1,6 @@
 # NB: Lowercase!
 {% set name = "mapserver" %}
-{% set version = "8.6.0" %}
+{% set version = "8.6.1" %}
 
 package:
   name: {{ name }}
@@ -8,10 +8,10 @@ package:
 
 source:
   url: https://download.osgeo.org/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: af1f6d7b6b4361d7b0305b4ea1869e33fa49a721bbc0e28e13dd015952dfd902
+  sha256: ff4c33271e91b46ba4d2b24990dc480bc3839e203e534102b2094a6166446c4b
 
 build:
-  number: 4
+  number: 0
   run_exports:
     # Presently libmapserver.so.2 is linked to libmapserver.so.x.y.z
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
