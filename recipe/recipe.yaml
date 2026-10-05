@@ -36,6 +36,7 @@ requirements:
     - swig <4.5
   host:
     - python
+    - libpython
     - pip
     - cairo
     - fcgi2
