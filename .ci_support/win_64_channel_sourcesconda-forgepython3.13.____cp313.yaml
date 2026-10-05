@@ -1,15 +1,7 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '11.0'
-MACOSX_SDK_VERSION:
-- '11.0'
 c_compiler:
-- clang
-c_compiler_version:
-- '21'
+- vs2022
 c_stdlib:
-- macosx_deployment_target
-c_stdlib_version:
-- '11.0'
+- vs
 cairo:
 - '1'
 channel_sources:
@@ -17,9 +9,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- clangxx
-cxx_compiler_version:
-- '21'
+- vs2022
 freetype:
 - '2'
 geos:
@@ -40,8 +30,6 @@ libpq:
 - '18'
 libxml2_devel:
 - '2.15'
-macos_machine:
-- x86_64-apple-darwin13.4.0
 mysql_devel:
 - '9.7'
 openssl:
@@ -59,12 +47,12 @@ postgresql:
 proj:
 - '9.9'
 python:
-- 3.12.* *_cpython
+- 3.13.* *_cp313
 target_platform:
-- osx-64
+- win-64
 zip_keys:
-- - c_compiler_version
-  - cxx_compiler_version
+- - python
+  - channel_sources
 zlib:
 - '1'
 zstd:
