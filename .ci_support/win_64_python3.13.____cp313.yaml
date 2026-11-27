@@ -1,5 +1,7 @@
 c_compiler:
-- vs2022
+- vs
+c_compiler_version:
+- '2022'
 c_stdlib:
 - vs
 cairo:
@@ -9,11 +11,13 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2022
+- vs
+cxx_compiler_version:
+- '2022'
 freetype:
 - '2'
 geos:
-- 3.15.0
+- 3.15.1
 giflib:
 - '6'
 libcurl:
